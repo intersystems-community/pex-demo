@@ -20,9 +20,9 @@ FROM mcr.microsoft.com/dotnet/core/runtime:2.1
 WORKDIR /app
 COPY --from=build /app ./
 
-COPY IRISGatewayCore21.deps.json .
-
-RUN cp KafkaConsumer.runtimeconfig.json IRISGatewayCore21.runtimeconfig.json
+# hack
+RUN cp KafkaConsumer.runtimeconfig.json IRISGatewayCore21.runtimeconfig.json && \
+    cp KafkaConsumer.deps.json IRISGatewayCore21.deps.json
 
 ENV PORT 55556
 ENV HOST netgw
