@@ -8,6 +8,16 @@ services:
     restart: always
     ports: 
       - 55555:55555
+
+  netgw:
+    image: intersystemscommunity/kafkaservice:latest
+    build:
+      context: dotnet
+      dockerfile: Dockerfile
+    restart: always
+    ports: 
+      - 55556:55556
+
   iris:
     init: true
     image: intersystemscommunity/pexdemo:latest
@@ -16,6 +26,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - 'jgw'
+#      - 'netgw'
     ports:
       - 52773:52773
       - 51773:51773
@@ -68,7 +79,7 @@ services:
     restart: 'on-failure'
 
   kafka-manager:
-    image: 'epam/kafka-manager:latest'
+    image: 'eduard93/kafka-manager:latest'
     hostname: 'kafka-manager'
     depends_on:
       - 'kafka'

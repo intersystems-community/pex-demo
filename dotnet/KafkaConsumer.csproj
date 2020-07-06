@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RestoreSources>$(RestoreSources);$(GWLIBDIR);https://api.nuget.org/v3/index.json</RestoreSources>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Confluent.Kafka" Version="1.4.3" />
+    <PackageReference Include="IRISGatewayCore21" Version="1.0.0" />
+    <PackageReference Include="IRISProviderCore21" Version="1.0.0" />
+  </ItemGroup>
+</Project>
