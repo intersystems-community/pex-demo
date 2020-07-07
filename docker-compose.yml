@@ -1,7 +1,7 @@
 version: "2.2"
 services:
   jgw:
-    image: intersystemscommunity/kafkaoperation:latest
+    image: intersystemscommunity/pexoperation:latest
     build:
       context: java
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
       - 55555:55555
 
   netgw:
-    image: intersystemscommunity/kafkaservice:latest
+    image: intersystemscommunity/pexservice:latest
     build:
       context: dotnet
       dockerfile: Dockerfile
@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - 'jgw'
-#      - 'netgw'
+      - 'netgw'
     ports:
       - 52773:52773
       - 51773:51773

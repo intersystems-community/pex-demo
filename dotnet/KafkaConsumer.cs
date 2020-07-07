@@ -19,6 +19,16 @@ namespace dc
         public string TOPIC;
 
         /// <summary>
+        /// Configuration item(s) to which to send file stream messages
+        /// </summary>
+        public string TargetConfigNames;
+
+        /// <summary>
+        /// Configuration item(s) to which to send file stream messages, parsed into string[]
+        /// </summary>
+        private string[] targets;
+
+        /// <summary>
         /// Connection to InterSystems IRIS
         /// </summary>
         private IRIS iris;
@@ -26,7 +36,7 @@ namespace dc
         /// <summary>
         /// Connection to Kafka
         /// </summary>
-        private object consumer;
+        private IConsumer<Ignore, string> consumer;
 
         /// <summary>
         /// Initialize connections 
@@ -35,10 +45,10 @@ namespace dc
         /// </summary>
         public override void OnInit()
         {
-            LOGINFO("INIT");
+            LOGINFO("Initialization started");
             var conf = new ConsumerConfig
             {
-                ///GroupId = "test-consumer-group",
+                GroupId = "test-consumer-group",
                 BootstrapServers = SERVERS,
                 // Note: The AutoOffsetReset property determines the start offset in the event
                 // there are not yet any committed offsets for the consumer group for the
@@ -50,23 +60,35 @@ namespace dc
 
             consumer = new ConsumerBuilder<Ignore, string>(conf).Build();
 
-            LOGINFO("Consumer type: " + consumer.GetType().Name);
+            consumer.Subscribe(TOPIC);
 
-            //consumer.Subscribe("my-topic");
-
-
+            if (TargetConfigNames != null)
+            {
+                targets = TargetConfigNames.Split(",");
+            }
             iris = GatewayContext.GetIRIS();
+
+            LOGINFO("Initialized!");
         }
 
         public override object OnProcessInput(object messageInput)
         {
-            LOGINFO("OnProcessInput");
-            // IRISObject request = (IRISObject)messageInput;
-
-            //LOGINFO(string.Format("received: %s", request.GetString("StringValue")));
-
-            //IRISObject response = (IRISObject)iris.ClassMethodObject("Ens.StringContainer", "%New", "Hello from .Net");
-            //return response;
+            bool atEnd = false;
+            while (atEnd is false)
+            {
+                ConsumeResult<Ignore, string> message = consumer.Consume(1000);
+                if (message is null)
+                {
+                    atEnd = true;
+                } else {
+                    string text = message.Message.Value;
+                    foreach (string target in targets)
+                    {
+                        IRISObject request = (IRISObject)iris.ClassMethodObject("Ens.StringContainer", "%New", text);
+                        SendRequestAsync(target, request);
+                    }
+                }
+            }
             return null;
         }
 
