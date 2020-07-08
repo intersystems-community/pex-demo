@@ -20,11 +20,10 @@ FROM mcr.microsoft.com/dotnet/core/runtime:2.1
 WORKDIR /app
 COPY --from=build /app ./
 
-# hack
+# Configs to start the Gateway Server
 RUN cp KafkaConsumer.runtimeconfig.json IRISGatewayCore21.runtimeconfig.json && \
     cp KafkaConsumer.deps.json IRISGatewayCore21.deps.json
 
 ENV PORT 55556
-ENV HOST netgw
 
-CMD dotnet IRISGatewayCore21.dll $PORT $HOST
+CMD dotnet IRISGatewayCore21.dll $PORT 0.0.0.0
