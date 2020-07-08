@@ -4,6 +4,7 @@ Demo showcasing InterSystems IRIS integration with Kafka via [PEX](https://docs.
 # PEX
 
 The Production EXtension (PEX) framework provides you with a choice of implementation languages when you are developing interoperability productions. Interoperability productions enable you to integrate systems with different message formats and communication protocols. If you are not familiar with interoperability productions, see [Introduction to Productions](https://docs.intersystems.com/irislatest/csp/docbook/Doc.View.cls?KEY=EGIN_intro#EGIN_productions).
+
 As of July 2020, PEX supports Java and the .NET languages. PEX provides flexible connections between business services, processes, and operations that are implemented in PEX-supported languages or in InterSystems ObjectScript. In addition, you can use PEX to develop, inbound and outbound adapters. The PEX framework allows you to create an entire production in Java or .NET or to create a production that has a mix of Java, .NET, or ObjectScript components. Once integrated, the production components written in Java and .NET are called at runtime and use the PEX framework to send messages to other components in the production. 
 
 
@@ -30,6 +31,19 @@ For Docker Desktop on Windows you'll need to share the repository folder with Do
 3. Open [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen?SOURCEORTARGET=KafkaConsumer) on `KafkaConsumer` service
 4. Start `KafkaConsumer` service. It would start receiving messages from `test` topic via .Net Gateway. If you want to receive messages from another topic, modify `Remote Settings` value for the Service.
 5. Refresh Message Viewer to see new messages.
+
+# Demo Dynamic Gateway
+
+Example of working with dynamic proxy objects:
+
+```
+docker-compose exec iris iris session iris
+set GW = ##class(%Net.Remote.Gateway).%New()
+set sc = GW.%Connect("netgw", 55556)
+set random = ##class(%Net.Remote.Object).%New(GW,"System.Random")
+write random.Next(100)
+set sc = GW.%Disconnect()
+```
 
 # What's inside
 
