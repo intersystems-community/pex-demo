@@ -15,6 +15,7 @@ CLIENTID=PEXProd</Setting>
     <Setting Target="Host" Name="%gatewayHost">jgw</Setting>
   </Item>
   <Item Name="KafkaConsumer" Category="" ClassName="EnsLib.PEX.BusinessService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Adapter" Name="CallInterval">0.1</Setting>
     <Setting Target="Host" Name="%remoteClassname">dc.KafkaConsumer</Setting>
     <Setting Target="Host" Name="%gatewayExtraClasspaths">/app/KafkaConsumer.dll</Setting>
     <Setting Target="Host" Name="%gatewayPort">55556</Setting>
