@@ -2,12 +2,15 @@ version: "2.2"
 services:
   jgw:
     image: intersystemscommunity/pexoperation:latest
+#    environment:
+#      - JVMARGS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     build:
       context: java
       dockerfile: Dockerfile
     restart: always
     ports: 
       - 55555:55555
+#      - 5005:5005
 
   netgw:
     image: intersystemscommunity/pexservice:latest
