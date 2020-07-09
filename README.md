@@ -1,6 +1,8 @@
 # PEX demo
 Demo showcasing InterSystems IRIS integration with Kafka via [PEX](https://docs.intersystems.com/irislatest/csp/docbook/Doc.View.cls?KEY=EPEX).
 
+![](https://raw.githubusercontent.com/intersystems-community/pex-demo/master/architecture.PNG)
+
 # PEX
 
 The Production EXtension (PEX) framework provides you with a choice of implementation languages when you are developing interoperability productions. Interoperability productions enable you to integrate systems with different message formats and communication protocols. If you are not familiar with interoperability productions, see [Introduction to Productions](https://docs.intersystems.com/irislatest/csp/docbook/Doc.View.cls?KEY=EGIN_intro#EGIN_productions).
