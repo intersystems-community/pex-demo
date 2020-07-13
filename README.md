@@ -24,8 +24,6 @@ docker-compose pull
 docker-compose up -d
 ```
 
-For Docker Desktop on Windows you'll need to share the repository folder with Docker before running `docker-compose up -d`.
-
 # Demo Production
 
 1. Open Production and test `KafkaProducer` operation by sending a `dc.KafkaRequest` message (topic: `test`, with any text). It would send a message to Kafka via Java Gateway.

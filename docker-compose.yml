@@ -82,14 +82,12 @@ services:
     restart: 'on-failure'
 
   kafka-manager:
-    image: 'eduard93/kafka-manager:latest'
+    image: 'eduard93/kafka-manager-demo:latest'
     hostname: 'kafka-manager'
     depends_on:
       - 'kafka'
     environment:
       - 'KAFKA_SERVERS_URL=kafka:29092'
-    volumes:
-      - './kafka-manager.properties:/app/config/application.properties'
     ports:
       - 8082:8082
     restart: 'on-failure'
