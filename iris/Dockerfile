@@ -2,8 +2,11 @@ FROM store/intersystems/iris-community:2020.2.0.211.0
 
 USER ${ISC_PACKAGE_MGRUSER}
 
-COPY irissession.sh /
-COPY  src /tmp
+COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP irissession.sh /
+COPY --chown=$ISC_PACKAGE_MGRUSER:$ISC_PACKAGE_IRISGROUP src /tmp
+
+RUN chmod +x /irissession.sh
+
 SHELL ["/irissession.sh"]
 
 RUN \
