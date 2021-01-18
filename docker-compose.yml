@@ -1,7 +1,7 @@
 version: "2.2"
 services:
   jgw:
-    image: intersystemscommunity/pexoperation:latest
+    image: intersystemsdc/pexoperation:latest
 #    environment:
 #      - JVMARGS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     build:
@@ -13,7 +13,7 @@ services:
 #      - 5005:5005
 
   netgw:
-    image: intersystemscommunity/pexservice:latest
+    image: intersystemsdc/pexservice:latest
     build:
       context: dotnet
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
 
   iris:
     init: true
-    image: intersystemscommunity/pexdemo:latest
+    image: intersystemsdc/pexdemo:latest
     build:
       context: iris
       dockerfile: Dockerfile
