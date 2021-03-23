@@ -17,6 +17,6 @@ WORKDIR $APP_HOME/src
 RUN javac -classpath $APP_HOME/jar/*:$APP_HOME/jgw/* dc/rmq/KafkaOperation.java && \
     jar -cvf $APP_HOME/jar/KafkaOperation.jar dc/rmq/KafkaOperation.class
 
-FROM intersystemscommunity/jgw:latest
+FROM intersystemsdc/jgw:latest
 
 COPY --from=builder /tmp/app/jar/*.jar $GWDIR/
