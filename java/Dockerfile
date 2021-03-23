@@ -4,7 +4,7 @@ ARG APP_HOME=/tmp/app
 
 COPY src $APP_HOME/src
 
-COPY --from=intersystemscommunity/jgw:latest /jgw/*.jar $APP_HOME/jgw/
+COPY --from=intersystemsdc/jgw:latest /jgw/*.jar $APP_HOME/jgw/
 
 WORKDIR $APP_HOME/jar/
 ADD https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.5.0/kafka-clients-2.5.0.jar .
