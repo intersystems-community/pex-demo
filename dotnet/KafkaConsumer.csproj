@@ -12,5 +12,6 @@
     <PackageReference Include="Confluent.Kafka" Version="1.4.3" />
     <PackageReference Include="IRISGatewayCore21" Version="1.0.0" />
     <PackageReference Include="IRISProviderCore21" Version="1.0.0" />
+    <PackageReference Include="IRISUtilsCore21" Version="1.0.0" />
   </ItemGroup>
 </Project>

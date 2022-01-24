@@ -4,7 +4,7 @@ ARG APP_HOME=/tmp/app
 
 COPY src $APP_HOME/src
 
-COPY --from=intersystemsdc/jgw:latest /jgw/*.jar $APP_HOME/jgw/
+COPY --from=intersystemsdc/jgw:2021.2 /jgw/*.jar $APP_HOME/jgw/
 
 WORKDIR $APP_HOME/jar/
 ADD https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.5.0/kafka-clients-2.5.0.jar .
@@ -17,6 +17,6 @@ WORKDIR $APP_HOME/src
 RUN javac -classpath $APP_HOME/jar/*:$APP_HOME/jgw/* dc/rmq/KafkaOperation.java && \
     jar -cvf $APP_HOME/jar/KafkaOperation.jar dc/rmq/KafkaOperation.class
 
-FROM intersystemsdc/jgw:latest
+FROM intersystemsdc/jgw:2021.2
 
 COPY --from=builder /tmp/app/jar/*.jar $GWDIR/
