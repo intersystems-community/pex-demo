@@ -2,15 +2,15 @@ version: "2.2"
 services:
   jgw:
     image: intersystemsdc/pexoperation:latest
-#    environment:
-#      - JVMARGS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    environment:
+      - JVMARGS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     build:
       context: java
       dockerfile: Dockerfile
     restart: always
     ports: 
       - 55555:55555
-#      - 5005:5005
+      - 5005:5005
 
   netgw:
     image: intersystemsdc/pexservice:latest
@@ -20,6 +20,15 @@ services:
     restart: always
     ports: 
       - 55556:55556
+
+  pygw:
+    image: intersystemsdc/pexprocess:latest
+    build:
+      context: py
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 55557:55557
 
   iris:
     init: true
