@@ -26,11 +26,13 @@ docker-compose up -d
 
 # Demo Production
 
-1. Open Production and test `KafkaProducer` operation by sending a `dc.KafkaRequest` message (topic: `test`, with any text). It would send a message to Kafka via Java Gateway.
-2. Open Kafka Manager and Navigate to `Resources` > `Topics` > `test` > `Browse Data` > `Fetch` to see that your message is enqueued.
-3. Open [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen?SOURCEORTARGET=KafkaConsumer) on `KafkaConsumer` service
-4. Start `KafkaConsumer` service. It would start receiving messages from `test` topic via .Net Gateway. If you want to receive messages from another topic, modify `Remote Settings` value for the Service.
-5. Refresh Message Viewer to see new messages.
+1. (Optional) Disable `KafkaConsumer` service to catch a message on Kafka side (otherwise it would be processed too quickly).
+2. Open Production and test `KafkaProducer` operation by sending a `dc.KafkaRequest` message (topic: `test`, with any text, if text is a positive integer it would start a cycling message interchange). It would send a message to Kafka via Java Gateway.
+3. Open [Kafka Manager](http://localhost:8082) and Navigate to `Resources` > `Topics` > `test` > `Browse Data` > `Fetch` to see that your message is enqueued.
+4. Open [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen?SOURCEORTARGET=KafkaConsumer) on `KafkaConsumer` service
+5. Start `KafkaConsumer` service. It would start receiving messages from `test` topic via .Net Gateway. If you want to receive messages from another topic, modify `Remote Settings` value for the Service.
+6. Refresh Message Viewer to see new messages.
+7. Send `Ens.StringContainer` request to `KafkaProcess` with a small integer value. Check emergent cycle session counting down to zero in a [Message Viewer](http://localhost:52773/csp/user/EnsPortal.MessageViewer.zen?SOURCEORTARGET=KafkaConsumer) on `KafkaConsumer` service.
 
 # Demo Dynamic Gateway
 
