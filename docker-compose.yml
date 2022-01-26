@@ -3,13 +3,16 @@ services:
   jgw:
     image: intersystemsdc/pexoperation:latest
     environment:
+      - JAVA_GATEWAY
       - JVMARGS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
     build:
       context: java
       dockerfile: Dockerfile
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE}
     restart: always
-    ports: 
-      - 55555:55555
+    ports:
+      - ${JAVA_GATEWAY}:55555
       - 5005:5005
 
   netgw:
@@ -17,18 +20,26 @@ services:
     build:
       context: dotnet
       dockerfile: Dockerfile
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE}
     restart: always
+    environment: 
+      - DOTNET_GATEWAY
     ports: 
-      - 55556:55556
+      - ${DOTNET_GATEWAY}:${DOTNET_GATEWAY}
 
   pygw:
     image: intersystemsdc/pexprocess:latest
     build:
       context: py
       dockerfile: Dockerfile
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE}
     restart: always
+    environment: 
+      - PYTHON_GATEWAY
     ports:
-      - 55557:55557
+      - ${PYTHON_GATEWAY}:${PYTHON_GATEWAY}
 
   iris:
     init: true
@@ -36,9 +47,8 @@ services:
     build:
       context: iris
       dockerfile: Dockerfile
-#    depends_on:
-#      - 'jgw'
-#      - 'netgw'
+      args:
+        IRIS_IMAGE: ${IRIS_IMAGE}
     ports:
       - 52773:52773
       - 51773:51773

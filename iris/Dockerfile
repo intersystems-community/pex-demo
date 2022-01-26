@@ -1,4 +1,5 @@
-FROM containers.intersystems.com/intersystems/iris-community:2021.2.0.649.0
+ARG IRIS_IMAGE
+FROM ${IRIS_IMAGE}
 
 USER ${ISC_PACKAGE_MGRUSER}
 
