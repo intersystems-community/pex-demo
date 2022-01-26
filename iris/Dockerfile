@@ -15,6 +15,7 @@ RUN \
   do ##class(%File).RemoveDirectoryTree("/tmp") \
   set production = "dc.Production" \
   set ^Ens.Configuration("csp","LastProduction") = production \
+  for user = "UnknownUser", "Admin", "SuperUser", "_SYSTEM" {set ^EnsPortal.Settings(user, "PreferredCategory", production)="Kafka"} \
   do ##class(Ens.Director).SetAutoStart(production)
 
 # bringing the standard shell back

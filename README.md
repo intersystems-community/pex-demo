@@ -57,6 +57,7 @@ set sc = GW.%Disconnect()
 - SuperServer: `51773`
 - Java Gateway: `55555`
 - .Net gateway: `55556`
+- Python gateway: `55557`
 - Zookeeper: `2181`
 - Kafka: `9092`
 
