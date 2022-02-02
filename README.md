@@ -20,8 +20,8 @@ As of January 2022, PEX supports Python, Java, and .NET (C#) languages. PEX prov
 ```
 git clone https://github.com/intersystems-community/pex-demo.git
 cd pex-demo
-docker-compose pull
-docker-compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 # Demo Production
