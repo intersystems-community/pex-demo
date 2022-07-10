@@ -14,9 +14,13 @@ ADD https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.j
 
 WORKDIR $APP_HOME/src
 
-RUN javac -classpath $APP_HOME/jar/*:$APP_HOME/jgw/* dc/rmq/KafkaOperation.java && \
-    jar -cvf $APP_HOME/jar/KafkaOperation.jar dc/rmq/KafkaOperation.class
+RUN javac -classpath $APP_HOME/jar/*:$APP_HOME/jgw/* dc/rmq/KafkaOperation.java dc/rmq/KafkaService.java && \
+    jar -cvf $APP_HOME/jar/KafkaOperation.jar dc/rmq/KafkaOperation.class dc/rmq/KafkaService.class && \
+    ls -al dc/rmq
 
 FROM intersystemsdc/jgw:2021.2
 
 COPY --from=builder /tmp/app/jar/*.jar $GWDIR/
+
+COPY *.properties $GWDIR/
+

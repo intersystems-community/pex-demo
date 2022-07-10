@@ -39,6 +39,15 @@ TargetConfigNames=KafkaProcess</Setting>
     <Setting Target="Host" Name="%remoteSettings">TOPIC=test
 TargetConfigName=KafkaProducer</Setting>
 </Item>
+<Item Name="KafkaConsumerJava" Category="Kafka" ClassName="EnsLib.PEX.BusinessService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Host" Name="%gatewayHost">jgw</Setting>
+    <Setting Target="Host" Name="%gatewayPort">55555</Setting>
+    <Setting Target="Host" Name="%remoteClassname">dc.rmq.KafkaService</Setting>
+    <Setting Target="Host" Name="%remoteSettings">SERVERS=kafka:29092
+TOPIC=test
+TargetConfigNames=KafkaProcess
+GROUP=testgroup</Setting>
+  </Item>
 </Production>
 }
 

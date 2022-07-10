@@ -2,3 +2,7 @@
 obj
 bin
 *.bak
+.idea
+*.iml
+*.log
+*.zip

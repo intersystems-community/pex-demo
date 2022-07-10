@@ -6,9 +6,10 @@ import com.intersystems.jdbc.IRIS;
 import com.intersystems.gateway.GatewayContext;
 
 import org.apache.kafka.clients.producer.*;
-import org.apache.kafka.common.serialization.LongSerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.common.serialization.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 
@@ -24,6 +25,9 @@ public class KafkaOperation extends BusinessOperation {
 
     // Name of our Producer
     public String CLIENTID;
+
+    /// Path to Config File
+    public String CONFIG;
 
     public void OnInit() throws Exception {
 
@@ -60,12 +64,19 @@ public class KafkaOperation extends BusinessOperation {
         return response;
     }
 
-    private Producer<Long, String> createProducer() {
+    private Producer<Long, String> createProducer() throws IOException {
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, SERVERS);
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, CLIENTID);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        if (CONFIG == null || CONFIG.isEmpty() || CONFIG.trim().isEmpty()) {
+            LOGINFO("Trying settings config");
+            props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, SERVERS);
+            props.put(ProducerConfig.CLIENT_ID_CONFIG, CLIENTID);
+            props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
+            props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        } else {
+            LOGINFO("Trying file config");
+            FileInputStream in = new FileInputStream(CONFIG);
+            props.load(in);
+         }
         return new KafkaProducer<>(props);
     }
 }
