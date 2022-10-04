@@ -2,6 +2,26 @@ import iris.pex
 
 class KafkaProcess(iris.pex.BusinessProcess):
 
+    TOPIC = str("")
+    # commented because seemed like this config let just oly one varible being found by PEX...
+    # TOPIC_info_var = {
+    #     'Description': "Kafka topic",
+    #     'IsRequired': True
+    # }
+    # @classmethod
+    # def TOPIC_info(self)->TOPIC_info_var:
+    #     pass
+
+    TargetConfigName = str("")
+    # commented because seemed like this config let just oly one varible being found by PEX...
+    # TargetConfigName_info_var = {
+    #     'Description': "Production target",
+    #     'IsRequired': True
+    # }
+    # @classmethod
+    # def TargetConfigName_info(self)->TargetConfigName_info_var:
+    #     pass
+
     def OnInit(self):
         self.LOGINFO("[Python] ...KafkaProcess:OnInit() is called")
         return
@@ -11,9 +31,9 @@ class KafkaProcess(iris.pex.BusinessProcess):
         return
 
     def OnRequest(self, request):
-        # called from business service, message is of type Ens.StringContainer with property StringValue
+        # called from business service, message is of type dc.KafkaRequest with property Text
         try:
-          value = int(request.get("StringValue"))
+          value = int(request.get("Text"))
           self.LOGINFO("[Python] ...MyBusinessProcess:OnRequest() is called wth request: " + str(value))
         except:
           self.LOGERROR("Unable to convert request to int.")

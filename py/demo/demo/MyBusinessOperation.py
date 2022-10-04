@@ -14,7 +14,7 @@ class MyBusinessOperation(iris.pex.BusinessOperation):
     def OnMessage(self, messageInput):
         # called from ticker service, message is of type MyRequest with property requestString
         #print("[Python] ...MyBusinessOperation:OnMessage() is called with message: " + messageInput.requestString)
-        self.LOGINFO("[Python] ...MyBusinessOperation:OnMessage() is called with message: " + messageInput.get("StringValue"))
+        self.LOGINFO("[Python] ...MyBusinessOperation:OnMessage() is called with message: " + messageInput.get("Text"))
         self.LOGINFO(str(dir(messageInput)))
         response = demo.MyResponse.MyResponse(str(dir(iris.pex)))
         return response

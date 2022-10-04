@@ -6,3 +6,4 @@ bin
 *.iml
 *.log
 *.zip
+py/demo/demo/__pycache__

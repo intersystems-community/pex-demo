@@ -15,8 +15,8 @@ class MyCombinedBusinessOperation(iris.pex.BusinessOperation):
         return
 
     def OnMessage(self, messageInput):
-        # this is called from MyCombinedBusinessProcess which sends an Ens.StringRequest message
-        print("[Python] ...MyCombinedBusinessOperation:OnMessage() is called with message: " + messageInput.get("StringValue"))
+        # this is called from MyCombinedBusinessProcess which sends an dc.KafkaRequest message
+        print("[Python] ...MyCombinedBusinessOperation:OnMessage() is called with message: " + messageInput.get("Text"))
         tResponse = demo.MyResponse.MyResponse()
         tResponse.responseString = "response from my business operation"
         return tResponse

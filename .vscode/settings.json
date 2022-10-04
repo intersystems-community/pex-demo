@@ -1,0 +1,18 @@
+{
+    "objectscript.conn" :{
+        "active": true,
+        "host": "localhost",
+        "port": 52774,
+        "ns": "USER",
+        "username": "_system",
+        "password": "SYS",
+        "docker-compose": {
+            "service": "iris",
+            "internalPort": 52773
+        },
+        "links": {
+            "UnitTest Portal": "${serverUrl}/csp/sys/%25UnitTest.Portal.Home.cls?$NAMESPACE=IRISAPP",
+            "Management Portal": "${serverUrl}/csp/sys/UtilHome.csp"
+        }
+    }
+}
