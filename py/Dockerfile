@@ -17,4 +17,7 @@ COPY demo ${GWLIBDIR}
 
 RUN cd ${GWLIBDIR} && python setup.py bdist_wheel
 
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
+
 CMD python -m iris PythonGateway ${PYTHON_GATEWAY} "" "" 0.0.0.0 "" 2>&1

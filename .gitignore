@@ -6,4 +6,11 @@ bin
 *.iml
 *.log
 *.zip
-py/demo/demo/__pycache__
+__pycache__
+py/grpc
+py/grpctest
+py/tests
+py/demo*
+py/spacy
+/src
+ignore
